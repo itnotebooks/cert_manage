@@ -31,7 +31,6 @@ except ImportError:
     
     You can run `cp config_example.py config.py`, and edit it.
     """
-
     raise ImportError(msg)
 
 # Quick-start development settings - unsuitable for production
