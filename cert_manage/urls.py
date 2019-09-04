@@ -15,7 +15,9 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from django.conf import settings
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 from cert_manage.views import IndexView
 
 urlpatterns = [
@@ -23,6 +25,10 @@ urlpatterns = [
     url(r'^users/', include('users.urls.views_urls', namespace='users')),
     url(r'^admin/', admin.site.urls),
 
+    url(r'^api/users/', include('users.urls.api_urls', namespace='api-users')),
     # External apps url
     url(r'^captcha/', include('captcha.urls')),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
+               + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
