@@ -56,6 +56,24 @@
     padding: 10px 15px;
 }
 
+.primary-panel .ibox-title {
+    color: #ffffff;
+    background-color: #1AB394;
+}
+
+.primary-panel .ibox-content {
+    border: 1px solid #1AB394;
+}
+
+.info-panel .ibox-title {
+    color: #ffffff;
+    background-color: #23c6c8;
+}
+
+.info-panel .ibox-content {
+    border: 1px solid #23c6c8;;
+}
+
 .loginscreen.middle-box {
     width: 300px;
 }
@@ -68,6 +86,13 @@
 
 .passwordBox {
     max-width: 460px;
+    margin: 0 auto;
+    padding: 100px 20px 20px 20px;
+}
+
+
+.passwordBox2 {
+    max-width: 660px;
     margin: 0 auto;
     padding: 100px 20px 20px 20px;
 }

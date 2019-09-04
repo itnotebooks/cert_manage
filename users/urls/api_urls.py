@@ -20,17 +20,6 @@ router = BulkRouter()
 router.register(r'v1/users', api.UserViewSet, 'user')
 router.register(r'v1/groups', api.UserGroupViewSet, 'user-group')
 
-urlpatterns = [
-    url(r'^v1/logout/$', api.UserLogOut.as_view(), name='user-logout'),
-    url(r'^v1/profile/$', api.UserProfile.as_view(), name='user-profile'),
-    url(r'^v1/users/(?P<pk>[0-9a-zA-Z\-]{36})/password/$',
-        api.ChangeUserPasswordApi.as_view(), name='change-user-password'),
-    url(r'^v1/users/(?P<pk>[0-9a-zA-Z\-]{36})/groups/$',
-        api.UserUpdateGroupApi.as_view(), name='user-update-group'),
-    url(r'^v1/groups/(?P<pk>[0-9a-zA-Z\-]{36})/users/$',
-        api.UserGroupUpdateUserApi.as_view(), name='user-group-update-user'),
-    url(r'^v1/group-update/$', api.UserGroupCreateorUpdate.as_view(), name='user-group-update'),
-
-]
+urlpatterns = []
 
 urlpatterns += router.urls

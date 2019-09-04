@@ -63,3 +63,7 @@ def get_login_ip(request):
 
 create_success_msg = _("<b>%(name)s</b> was created successfully")
 update_success_msg = _("<b>%(name)s</b> was updated successfully")
+
+
+def refresh_token(token, user, expiration=settings.TOKEN_EXPIRATION or 3600):
+    cache.set(token, user.id, expiration)

@@ -47,11 +47,13 @@ except:
 
 def make_migrations():
     print('Check database structure change...')
+    os.chdir(BASE_DIR)
     subprocess.call('python3 manage.py migrate', shell=True)
 
 
 def collect_static():
     print("Collect static files")
+    os.chdir(BASE_DIR)
     subprocess.call('python3 manage.py collectstatic --no-input', shell=True)
 
 
