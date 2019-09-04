@@ -161,11 +161,15 @@ LOCALE_PATHS = [os.path.join(BASE_DIR, 'i18n')]
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_DIR, "static")
+STATIC_ROOT = os.path.join(PROJECT_DIR, "data", "static")
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+# Media files (File, ImageField) will be save these
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(PROJECT_DIR, "data", "media").replace('\\', '/') + '/'
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -226,3 +230,5 @@ BOOTSTRAP3 = {
 }
 
 DEFAULT_EXPIRED_YEARS = 70
+TOKEN_EXPIRATION = CONFIG.TOKEN_EXPIRATION or 3600
+DISPLAY_PER_PAGE = CONFIG.DISPLAY_PER_PAGE or 25

@@ -16,7 +16,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cert_manage.settings')
 
 from django.conf import settings
 
-app = Celery('cert_manage')
+app = Celery('cert_manage', backend=settings.CELERY_BROKER_URL, broker=settings.CELERY_BROKER_URL)
 
 # Using a string here means the worker will not have to
 # pickle the object when using Windows.
