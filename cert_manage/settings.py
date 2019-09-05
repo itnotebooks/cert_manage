@@ -111,8 +111,7 @@ DATABASES = {
         'HOST': CONFIG.DB_HOST,
         'PORT': CONFIG.DB_PORT,
         'USER': CONFIG.DB_USER,
-        'PASSWORD': CONFIG.DB_PASSWORD,
-        'ATOMIC_REQUESTS': True
+        'PASSWORD': CONFIG.DB_PASSWORD
     }
 }
 

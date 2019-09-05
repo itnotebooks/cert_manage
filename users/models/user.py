@@ -173,7 +173,6 @@ class User(AbstractUser):
             'is_superuser': self.is_superuser,
             'opt_role': self.get_role_display(),
             'role': self.get_role_display(),
-            # 'dept': self.get_dept,
             'groups': [group.name for group in self.groups.all()],
             'phone': self.phone,
             'otp_level': self.otp_level,
@@ -197,11 +196,13 @@ class User(AbstractUser):
     @classmethod
     def initial(cls):
         user = cls(username='admin',
-                   email='admin@cmdb.org',
+                   email='admin@itnotebooks.com',
                    name=_('Administrator'),
+                   first_name=_('Super'),
+                   last_name=_('Manager'),
                    password_raw='admin',
                    role='Admin',
-                   comment=_('Administrator is the super user of system'),
-                   created_by=_('System'))
+                   comment=_('Administrator is the super user of system')
+                   )
         user.save()
         user.groups.add(UserGroup.initial())

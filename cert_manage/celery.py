@@ -20,5 +20,10 @@ app = Celery('cert_manage', backend=settings.CELERY_BROKER_URL, broker=settings.
 
 # Using a string here means the worker will not have to
 # pickle the object when using Windows.
-app.config_from_object('django.conf:settings')
+app.conf.update(
+    task_serializer='pickle',
+    accept_content=['json', 'pickle'],
+    result_serializer='pickle',
+    timezone='Ais/Shanghai'
+)
 app.autodiscover_tasks(lambda: [app_config.split('.')[0] for app_config in settings.INSTALLED_APPS])

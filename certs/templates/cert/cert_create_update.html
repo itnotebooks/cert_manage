@@ -1,0 +1,85 @@
+{% extends 'cert/_base_create_update.html' %}
+{% load static %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block form %}
+    <form action="" method="post" class="form-horizontal">
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+        {% csrf_token %}
+        <h3>{% trans 'Basic' %}</h3>
+        {% bootstrap_field form.name layout="horizontal" %}
+        <div class="hidden">
+            {% bootstrap_field form.method layout="horizontal" %}
+        </div>
+        <div class="id-domain">
+            <div class="form-group">
+                <label for="{{ form.is_domain.id_for_label }}"
+                       class="col-sm-2 control-label">通过域名验证</label>
+                <div class="col-sm-8">
+                    {{ form.is_domain }}
+                    <div class="help-block">
+                        {{ form.is_domain.help_text }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="common-domain">
+            {% bootstrap_field form.domain_url layout="horizontal" %}
+        </div>
+
+        <div class="local-crt-file">
+            {% bootstrap_field form.crt_file layout="horizontal" %}
+        </div>
+        <div class="local-key-file">
+            {% bootstrap_field form.key_file layout="horizontal" %}
+        </div>
+        {% bootstrap_field form.users layout="horizontal" %}
+        {% bootstrap_field form.comment layout="horizontal" %}
+
+        <div class="hr-line-dashed"></div>
+        <div class="form-group">
+            <div class="col-sm-4 col-sm-offset-2">
+                <button class="btn btn-default" type="reset"> {% trans 'Reset' %}</button>
+                <button id="submit_button" class="btn btn-primary" type="submit">{% trans 'Submit' %}</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block custom_foot_js %}
+    <script>
+        var is_domain = '#' + '{{ form.is_domain.id_for_label }}';
+
+        function is_domainDisplay() {
+            if ($(is_domain).prop('checked')) {
+                $('.local-crt-file').addClass('hidden');
+                $('.local-key-file').addClass('hidden');
+                $('.common-domain').removeClass('hidden');
+            } else {
+                $('.common-domain').addClass('hidden');
+                $('.local-crt-file').removeClass('hidden');
+                $('.local-key-file').removeClass('hidden');
+            }
+        }
+
+        $(document).ready(function () {
+
+            $('.select2').select2({
+                allowClear: true
+            });
+
+            is_domainDisplay()
+
+        }).on('change', is_domain, function () {
+            is_domainDisplay()
+        })
+
+
+    </script>
+{% endblock %}

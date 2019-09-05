@@ -18,7 +18,5 @@ router = BulkRouter()
 # 证书
 router.register(r'v1/cert', api.CertViewSet, 'cert')
 
-urlpatterns = [
-]
-
+urlpatterns = []
 urlpatterns += router.urls

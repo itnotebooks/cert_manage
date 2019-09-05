@@ -23,10 +23,12 @@ from cert_manage.views import IndexView
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name='index'),
     url(r'^users/', include('users.urls.views_urls', namespace='users')),
-    url(r'^admin/', admin.site.urls),
+    url(r'^certs/', include('certs.urls.views_urls', namespace='certs')),
 
     url(r'^api/users/', include('users.urls.api_urls', namespace='api-users')),
+    url(r'^api/certs/', include('certs.urls.api_urls', namespace='api-certs')),
     # External apps url
+    url(r'^admin/', admin.site.urls),
     url(r'^captcha/', include('captcha.urls')),
 ]
 

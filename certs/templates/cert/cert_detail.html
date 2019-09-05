@@ -1,0 +1,128 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block nav_status %}active{% endblock %}
+{% block content %}
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="panel-options">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="{% url 'ssl-cert-assets:ssl-cert-detail' pk=cert.id %}" class="text-center"><i
+                                        class="fa fa-laptop"></i> {% trans 'Asset detail' %} </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="col-sm-12" style="padding-left: 0">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <span class="label"><b>{{ cert.name }}</b></span>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                            <i class="fa fa-wrench"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-user">
+                                        </ul>
+                                        <a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="ibox-content">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr class="no-borders-tr">
+                                            <td width="20%">{% trans 'Name' %}:</td>
+                                            <td><b>{{ cert.name }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Common Domain' %}:</td>
+                                            <td><b>{{ cert.domain }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Orther Domain' %}:</td>
+                                            <td>
+                                                <b>{{ cert.orther_domain }}</b></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>{% trans 'Organization Name' %}:</td>
+                                            <td>
+                                                <b>{{ cert.organization_name }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Serial number' %}:</td>
+                                            <td>
+                                                <b>{{ cert.serial_number }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Issued By' %}:</td>
+                                            <td>
+                                                <b>{{ cert.issued_by }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'SSL Cert Type' %}:</td>
+                                            <td>
+                                                <b>{{ cert.cert_type }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Cert Detection Approach' %}:</td>
+                                            <td>
+                                                <b>{{ cert.get_method }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Not Before' %}:</td>
+                                            <td>
+                                                <b>{{ cert.notbefore }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Not After' %}:</td>
+                                            <td>
+                                                <b>{{ cert.notafter }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Remaining Days' %}:</td>
+                                            <td>
+                                                <b>{{ cert.remain_days }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Contact' %}:</td>
+                                            <td>
+                                                <b>{{ cert.get_contact }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% trans 'Comment' %}:</td>
+                                            <td><b>
+                                                {{ asset.comment|safe }}
+                                            </b></td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block custom_foot_js %}
+    <script>
+        $(document).ready(function () {
+        })
+
+    </script>
+{% endblock %}

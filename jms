@@ -51,6 +51,15 @@ def make_migrations():
     subprocess.call('python3 manage.py migrate', shell=True)
 
 
+def make_superuser():
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", 'cert_manage.settings')
+    import django
+    django.setup()
+    from users.models import User
+    if not User.objects.filter(username='admin'):
+        User.initial()
+
+
 def collect_static():
     print("Collect static files")
     os.chdir(BASE_DIR)
@@ -59,6 +68,7 @@ def collect_static():
 
 def prepare():
     make_migrations()
+    make_superuser()
     collect_static()
 
 

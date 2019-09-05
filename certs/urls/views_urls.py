@@ -14,7 +14,6 @@ from certs import views
 app_name = 'certs'
 
 urlpatterns = [
-
     # 证书
     url(r'^$', views.CertListView.as_view(), name='cert-index'),
     url(r'^create/$', views.CertCreateView.as_view(), name='cert-create'),

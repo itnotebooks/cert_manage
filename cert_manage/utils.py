@@ -11,8 +11,14 @@ import base64
 import calendar
 import hashlib
 import threading
+
+from datetime import datetime
 from email.utils import formatdate
+
+from django.utils.translation import ugettext as _
 from django.contrib.auth.mixins import UserPassesTestMixin
+
+from cert_manage.tasks import send_mail_async
 
 
 class AdminUserRequiredMixin(UserPassesTestMixin):
@@ -95,3 +101,45 @@ def get_object_or_none(model, **kwargs):
     except model.DoesNotExist:
         return None
     return obj
+
+
+def certs_messages_remaind_email(cert, cert_info):
+    base_message = '还有Days天到期'
+    if int(cert_info.get('remain_days')) == 0:
+        message = '已到期'
+    elif int(cert_info.get('remain_days')) < 0:
+        message = '已过期'
+    elif int(cert_info.get('remain_days')) in [90, 60, 45, 30, 15] or int(cert_info.get('remain_days')) <= 14:
+        message = base_message.replace('Days', str(cert_info.get('remain_days')))
+    else:
+        message = None
+
+    if message:
+        if len(cert_info.get('orther_domain')) > 0:
+            orther_domain = [domain[1] for domain in cert_info.get('orther_domain')]
+        else:
+            orther_domain = cert_info.get('orther_domain')
+        subject = _('重要通知：%(domain)s证书到期提醒(%(time)s)') % {'domain': cert_info.get('domain'),
+                                                          'time': datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+        recipient_list = [user.email for user in cert.users.all()]
+        message = _("""
+        艾瑞巴蒂~</br>
+        </br>
+        %(domain)s证书%(message)s，避免影响业务的正常运行请及时更新。</br>
+        =========================================================</br>
+        颁发机构: %(issued_by)s</br>
+        证书类型: %(cert_type)s</br>
+        域名信息: %(domain)s</br>
+        备用域名: %(orther_domain)s</br>
+        有效期至: %(notafter)s</br>
+        =========================================================</br>
+        """) % {
+            'domain': cert_info.get('domain'),
+            'message': message,
+            'issued_by': cert_info.get('issued_by'),
+            'cert_type': cert_info.get('cert_type'),
+            'orther_domain': orther_domain,
+            'notafter': cert_info.get('notafter'),
+        }
+
+        send_mail_async.delay(subject, message, recipient_list, html_message=message)

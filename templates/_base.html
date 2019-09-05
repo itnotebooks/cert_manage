@@ -7,6 +7,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title> 证书管理系统 </title>
     {% include '_head_css_js.html' %}
+    {% block custom_head_css_js %}
+    {% endblock %}
 </head>
 <body class="hold-transition skin-blue layout-top-nav">
 
@@ -25,7 +27,8 @@
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="{% url 'index' %}">主页 </a></li>
-                        <li><a href="">证书管理</a></li>
+                        <li class="{% block nav_status %}{% endblock %}"><a href="{% url 'certs:cert-index' %}">证书管理</a>
+                        </li>
                     </ul>
 
                 </div>
@@ -68,4 +71,6 @@
 </div>
 
 </body>
+{% block custom_foot_js %}
+{% endblock %}
 </html>
