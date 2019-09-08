@@ -1,9 +1,9 @@
+{% load static i18n %}
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     {% load staticfiles %}
-    {% load i18n %}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title> 证书管理系统 </title>
     {% include '_head_css_js.html' %}
@@ -71,6 +71,7 @@
 </div>
 
 </body>
+{% include '_foot_js.html' %}
 {% block custom_foot_js %}
 {% endblock %}
 </html>

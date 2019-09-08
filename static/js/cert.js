@@ -1,3 +1,39 @@
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                // break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+
+function setAjaxCSRFToken() {
+    var csrftoken = getCookie('csrftoken');
+    var sessionid = getCookie('sessionid');
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+}
+
+
 function APIUpdateAttr(props) {
     // props = {url: .., body: , success: , error: , method: ,}
     props = props || {};
@@ -242,3 +278,43 @@ cert.initDataTable = function (options) {
     // cmdb.table = table;
     return table;
 };
+
+// Sweet Alert for Delete
+function objectDelete(obj, name, url, redirectTo) {
+    function doDelete() {
+        var body = {};
+        var success = function () {
+            // swal('Deleted!', "[ "+name+"]"+" has been deleted ", "success");
+            if (!redirectTo) {
+                $(obj).parent().parent().remove();
+            } else {
+                window.location.href = redirectTo;
+            }
+        };
+        var fail = function () {
+            swal("错误", "删除" + "[ " + name + " ]" + "遇到错误", "error");
+        };
+        APIUpdateAttr({
+            url: url,
+            body: JSON.stringify(body),
+            method: "DELETE",
+            success_message: "删除成功",
+            success: success,
+            error: fail
+        });
+    }
+
+    swal({
+        title: '你确定删除吗 ?',
+        text: " [" + name + "] ",
+        type: "warning",
+        showCancelButton: true,
+        cancelButtonText: '取消',
+        confirmButtonColor: "#ed5565",
+        confirmButtonText: '确认',
+    }).then(function (action) {
+        if (action.value == true) {
+            doDelete()
+        }
+    });
+}

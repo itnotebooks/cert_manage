@@ -14,27 +14,36 @@ from certs.utils import load_certificate
 
 
 @shared_task
-def refresh_certs_messages_to_db(cert_obj=None):
+def refresh_certs_messages_to_db(cert_obj_id=None):
     '''
     此函数用于刷新证书的详细信息
     :return:
     '''
-    if cert_obj:
-        certs = Certs.objects.filter(id=cert_obj.id)
+    print('000000000000000000000000000000')
+    print(cert_obj_id)
+    if cert_obj_id:
+        certs = Certs.objects.filter(id=cert_obj_id)
     else:
         certs = Certs.objects.all()
 
     for cert in certs:
-        if not cert.method: cert.method = 0
-        if cert.method == 0:
-            cert_info = load_certificate(cert.method, cert.domain_url)
-        else:
-            cert_info = load_certificate(cert.method, cert.pem_file)
 
-        for k, v in cert_info.items():
-            setattr(cert, k, v)
-            if k.startswith('remain_days'):
-                if int(v) <= 90:
-                    certs_messages_remaind_email(cert, cert_info)
-        cert.save()
+        Certs._meta.auto_created = True
+        try:
+            if not cert.method: cert.method = 0
+            if cert.method == 0:
+                cert_info = load_certificate(cert.method, cert.domain_url)
+            else:
+                cert_info = load_certificate(cert.method, cert.pem_file)
+
+            for k, v in cert_info.items():
+                setattr(cert, k, v)
+                if k.startswith('remain_days'):
+                    if int(v) <= 90:
+                        certs_messages_remaind_email(cert, cert_info)
+            cert.save()
+        except  Exception as e:
+            print(e)
+        finally:
+            Certs._meta.auto_created = False
     return 0

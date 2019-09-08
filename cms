@@ -4,7 +4,7 @@
 # @Email          : eng.eric.winn@gmail.com
 # @Time           : 19-9-3 下午9:20
 # @Version        : 1.0
-# @File           : jms
+# @File           : cms
 # @Software       : PyCharm
 import argparse
 import os
@@ -24,6 +24,7 @@ except ImportError:
     sys.exit(1)
 
 os.environ["PYTHONENCODING"] = "UTF-8"
+print(BASE_DIR)
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 TMP_DIR = os.path.join(BASE_DIR, 'tmp')
 HTTP_HOST = CONFIG.HTTP_BIND_HOST or '127.0.0.1'

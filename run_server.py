@@ -11,5 +11,5 @@ import sys
 import subprocess
 
 if __name__ == '__main__':
-    subprocess.call('python3 jms start all', shell=True,
+    subprocess.call('python3 cms start all', shell=True,
                     stdin=sys.stdin, stdout=sys.stdout)

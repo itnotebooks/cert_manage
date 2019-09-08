@@ -52,7 +52,7 @@ class Certs(models.Model):
     comment = models.TextField(max_length=128, null=True, blank=True, verbose_name=_('Comment'))
 
     def __str__(self):
-        return self.domain
+        return self.name
 
     @property
     def get_method(self):
