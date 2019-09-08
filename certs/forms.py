@@ -49,7 +49,6 @@ class CertCreateUpdateForm(forms.ModelForm):
             cert = Certs.objects.get(id=initial.get('pk'))
             if int(cert.method) == 1:
                 self.fields['is_domain'].initial = False
-        self.fields['users'].queryset = User.objects.exclude(username__in=['admin'])
 
     # 重写save方法，处理多个字段的问题
     def save(self, commit=True):

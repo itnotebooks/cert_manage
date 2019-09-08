@@ -16,6 +16,7 @@ migrations/
 eggs/
 .eggs/
 .idea/
+data/static/
 lib/
 lib64/
 parts/
