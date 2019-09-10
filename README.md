@@ -64,3 +64,11 @@ $ vim config.py
 $ cd /opt/cert_manage
 $ python run_server.py
 ~~~
+
+## 访问
+
+~~~
+http://127.0.0.1:8080
+初始用户名：admin
+初始密码：admin
+~~~
