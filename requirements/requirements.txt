@@ -16,6 +16,7 @@ django-timezone-field==3.0
 djangorestframework==3.10.2
 djangorestframework-bulk==0.2.1
 gunicorn==19.9.0
+idna==2.8
 importlib-metadata==0.20
 kombu==4.6.4
 more-itertools==7.2.0

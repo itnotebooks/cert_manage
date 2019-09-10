@@ -36,6 +36,7 @@
     margin-bottom: 0;
     padding: 14px 15px 7px;
     min-height: 48px;
+    border-top: none;
 }
 
 .ibox-content {
@@ -1108,4 +1109,29 @@ button.dim:active:before {
     .navbar-nav > .user-menu > .dropdown-menu > .user-footer .btn-default:hover {
         background-color: #f9f9f9
     }
+}
+
+.nav > li.active {
+    border-left: 0px solid;
+}
+
+.nav.nav-tabs li.active {
+    background-color: #FFF;
+}
+
+.nav.nav-tabs li > a {
+    max-height: 38px;
+}
+
+.nav.nav-tabs li.active a {
+    border: none;
+}
+
+div.dataTables_wrapper div.dataTables_filter,
+.dataTables_length {
+    float: right !important;
+}
+
+div.dataTables_wrapper div.dataTables_filter {
+    margin-left: 15px;
 }

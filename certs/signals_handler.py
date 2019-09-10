@@ -17,5 +17,5 @@ from certs.models import Certs
 
 @receiver(post_save, sender=Certs)
 def certs_pre_create_or_update(sender, instance, **kwargs):
-    refresh_certs_messages_to_db(instance.id)
+    refresh_certs_messages_to_db.delay(instance.id)
     return instance

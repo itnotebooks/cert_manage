@@ -24,7 +24,7 @@ except ImportError:
     sys.exit(1)
 
 os.environ["PYTHONENCODING"] = "UTF-8"
-print(BASE_DIR)
+
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 TMP_DIR = os.path.join(BASE_DIR, 'tmp')
 HTTP_HOST = CONFIG.HTTP_BIND_HOST or '127.0.0.1'
@@ -175,7 +175,7 @@ def start_celery():
 
     cmd = [
         'celery', 'worker',
-        '-A', 'cert_manage',
+        '-A', 'cert_manage.celery',
         '-l', LOG_LEVEL.lower(),
         '--pidfile', pid_file,
         '-c', str(WORKERS),
@@ -202,7 +202,7 @@ def start_beat():
     scheduler = "django_celery_beat.schedulers:DatabaseScheduler"
     cmd = [
         'celery', 'beat',
-        '-A', 'cert_manage',
+        '-A', 'cert_manage.celery',
         '--pidfile', pid_file,
         '-l', LOG_LEVEL,
         '--scheduler', scheduler,

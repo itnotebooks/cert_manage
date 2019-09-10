@@ -4,38 +4,22 @@
 
 {% block nav_status %}active{% endblock %}
 {% block content %}
-    <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="row">
+    <div>
+        <div>
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="panel-options">
                         <ul class="nav nav-tabs">
                             <li class="active">
-                                <a href="{% url 'ssl-cert-assets:ssl-cert-detail' pk=cert.id %}" class="text-center"><i
-                                        class="fa fa-laptop"></i> {% trans 'Asset detail' %} </a>
+                                <a href="{% url 'certs:cert-detail' pk=cert.id %}" class="text-center"><i
+                                        class="fa fa-laptop"></i> {% trans 'Cert detail' %} </a>
                             </li>
 
                         </ul>
                     </div>
                     <div class="tab-content">
-                        <div class="col-sm-12" style="padding-left: 0">
+                        <div>
                             <div class="ibox float-e-margins">
-                                <div class="ibox-title">
-                                    <span class="label"><b>{{ cert.name }}</b></span>
-                                    <div class="ibox-tools">
-                                        <a class="collapse-link">
-                                            <i class="fa fa-chevron-up"></i>
-                                        </a>
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                            <i class="fa fa-wrench"></i>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-user">
-                                        </ul>
-                                        <a class="close-link">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </div>
-                                </div>
                                 <div class="ibox-content">
                                     <table class="table">
                                         <tbody>
