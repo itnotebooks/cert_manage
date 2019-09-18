@@ -32,7 +32,7 @@ $ python3 -m venv /opt/py3
 ## 载入虚拟环境
 
 ~~~
-$ source /opt/py3
+$ source /opt/py3/bin/activate
 ~~~
 
 ## 获取cert_mange代码
