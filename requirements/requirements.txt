@@ -5,7 +5,7 @@ billiard==3.6.1.0
 celery==4.3.0
 cffi==1.12.3
 cryptography==2.7
-Django==2.2.5
+Django==2.1
 django-bootstrap3==11.1.0
 django-celery-beat==1.5.0
 django-filter==2.2.0
@@ -22,7 +22,6 @@ kombu==4.6.4
 more-itertools==7.2.0
 passlib==1.7.1
 Pillow==6.1.0
-pkg-resources==0.0.0
 pycparser==2.19
 pyOpenSSL==19.0.0
 python-crontab==2.3.8

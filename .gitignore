@@ -12,7 +12,6 @@ build/
 develop-eggs/
 dist/
 downloads/
-migrations/
 eggs/
 .eggs/
 .idea/
