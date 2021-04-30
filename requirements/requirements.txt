@@ -30,6 +30,6 @@ pytz==2019.2
 redis==3.3.8
 six==1.12.0
 sqlparse==0.3.0
-urllib3==1.25.3
+urllib3==1.25.8
 vine==1.3.0
 zipp==0.6.0
