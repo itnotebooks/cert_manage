@@ -5,7 +5,7 @@ billiard==3.6.1.0
 celery==4.3.0
 cffi==1.12.3
 cryptography==2.7
-Django==2.1.11
+Django==2.2.24
 django-bootstrap3==11.1.0
 django-celery-beat==1.5.0
 django-filter==2.2.0
